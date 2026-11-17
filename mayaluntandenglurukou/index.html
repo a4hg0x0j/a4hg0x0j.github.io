@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>maya论坛登录入口-账号登录与版块使用指南</title>
+<meta name="description" content="maya论坛登录入口说明页，整理账号登录流程、验证码与密码找回方式、各版块通行权限、常见登录故障排查步骤，以及社区活跃话题与用户反馈汇总，帮助新老用户顺利进入社区参与讨论。">
+<meta name="keywords" content="maya论坛登录入口">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c4d4a'/%3E%3Cpath d='M16 44V20h6l10 14 10-14h6v24h-6V30l-10 13-10-13v14z' fill='%23f2b705'/%3E%3C/svg%3E">
+<style>
+:root{
+  --c-bg:#f6f4ee;
+  --c-surface:#ffffff;
+  --c-ink:#1f2723;
+  --c-ink-soft:#4a5a52;
+  --c-primary:#1c4d4a;
+  --c-primary-dark:#123634;
+  --c-accent:#c9561f;
+  --c-accent-soft:#fbe8dd;
+  --c-gold:#f2b705;
+  --c-line:#dcd8cc;
+  --c-line-soft:#ece8dd;
+  --c-tag:#eaf1ef;
+  --radius-s:6px;
+  --radius-m:12px;
+  --radius-l:20px;
+  --shadow-s:0 1px 3px rgba(31,39,35,.08);
+  --shadow-m:0 6px 18px rgba(31,39,35,.09);
+  --space-1:6px;
+  --space-2:12px;
+  --space-3:18px;
+  --space-4:28px;
+  --space-5:44px;
+  --space-6:64px;
+  --fs-h1:clamp(1.9rem,4.4vw,3rem);
+  --fs-h2:clamp(1.35rem,2.6vw,1.75rem);
+  --fs-h3:1.12rem;
+  --fs-body:1rem;
+  --fs-small:.86rem;
+  --font-sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  --font-serif:"Songti SC","Noto Serif SC",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--c-bg);
+  color:var(--c-ink);
+  font-family:var(--font-sans);
+  font-size:var(--fs-body);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--c-primary);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--c-accent);outline-offset:2px;border-radius:3px}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 var(--space-2)}
+ul,ol{margin:0 0 var(--space-2);padding-left:1.3em}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--c-primary);color:#fff;padding:10px 16px;z-index:200}
+.skip:focus{left:8px;top:8px}
+
+/* ---------- 吸顶公告 + 页头 ---------- */
+.sticky-top{position:sticky;top:0;z-index:100;box-shadow:var(--shadow-s)}
+.notice{
+  background:var(--c-primary-dark);
+  color:#e9f1ef;
+  font-size:var(--fs-small);
+}
+.notice .wrap{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 0;flex-wrap:wrap;
+}
+.notice .dot{width:7px;height:7px;border-radius:50%;background:var(--c-gold);flex:none}
+.notice b{color:var(--c-gold);font-weight:600}
+.notice a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+header.site-head{
+  background:var(--c-surface);
+  border-bottom:1px solid var(--c-line);
+}
+.head-inner{
+  display:flex;align-items:center;gap:var(--space-3);
+  padding:10px 0;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;flex:none}
+.brand svg{width:38px;height:38px;flex:none}
+.brand-name{font-weight:800;font-size:1.06rem;letter-spacing:.5px;color:var(--c-primary-dark)}
+.brand-sub{display:block;font-size:.7rem;font-weight:400;color:var(--c-ink-soft);letter-spacing:2px}
+nav.main-nav{margin-left:auto}
+nav.main-nav ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+nav.main-nav a{
+  display:block;padding:8px 11px;border-radius:var(--radius-s);
+  font-size:.92rem;color:var(--c-ink-soft);white-space:nowrap;
+}
+nav.main-nav a:hover{background:var(--c-tag);text-decoration:none;color:var(--c-primary-dark)}
+nav.main-nav a.active{color:var(--c-primary-dark);font-weight:600;background:var(--c-tag)}
+.head-actions{display:flex;align-items:center;gap:10px;flex:none}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box input{
+  width:170px;padding:8px 34px 8px 12px;border:1px solid var(--c-line);
+  border-radius:999px;font:inherit;font-size:.88rem;background:var(--c-bg);
+}
+.search-box input:focus{width:200px;background:#fff}
+.search-box button{
+  position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  border:0;background:var(--c-primary);color:#fff;width:26px;height:26px;
+  border-radius:50%;cursor:pointer;font-size:.8rem;line-height:1;
+}
+.btn{
+  display:inline-block;padding:9px 18px;border-radius:999px;
+  background:var(--c-primary);color:#fff;font-size:.9rem;font-weight:600;
+  border:1px solid var(--c-primary);cursor:pointer;text-align:center;
+}
+.btn:hover{background:var(--c-primary-dark);text-decoration:none}
+.btn.ghost{background:transparent;color:var(--c-primary);}
+.btn.ghost:hover{background:var(--c-tag)}
+.btn.accent{background:var(--c-accent);border-color:var(--c-accent)}
+.btn.accent:hover{background:#a8461a}
+.menu-btn{
+  display:none;border:1px solid var(--c-line);background:#fff;border-radius:var(--radius-s);
+  padding:7px 12px;font:inherit;font-size:.9rem;cursor:pointer;color:var(--c-ink);
+}
+.search-msg{font-size:.85rem;color:var(--c-accent);padding:4px 0 0}
+[data-search-item].hide{display:none!important}
+
+/* 锚点偏移 */
+section[id],div[id].anchor{scroll-margin-top:112px}
+@media(max-width:860px){section[id],div[id].anchor{scroll-margin-top:158px}}
+
+/* ---------- 首屏 ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#f0ece0 0%,#f6f4ee 60%);border-bottom:1px solid var(--c-line)}
+.hero-inner{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:var(--space-5);align-items:center;padding:var(--space-5) 0 var(--space-5);
+}
+.hero h1{font-size:var(--fs-h1);color:var(--c-primary-dark);letter-spacing:1px}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:8px;font-size:.82rem;letter-spacing:1px;
+  color:var(--c-primary);background:var(--c-tag);padding:4px 12px;border-radius:999px;margin-bottom:var(--space-3);
+}
+.hero .kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c-accent)}
+.hero p.lead{font-size:1.05rem;color:var(--c-ink-soft);max-width:34em;margin-bottom:var(--space-4)}
+.hero-cta{display:flex;gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4)}
+.hero-stats{display:flex;gap:var(--space-4);flex-wrap:wrap;border-top:1px dashed var(--c-line);padding-top:var(--space-3)}
+.hero-stats div{min-width:88px}
+.hero-stats b{display:block;font-size:1.5rem;color:var(--c-primary-dark);font-family:var(--font-serif)}
+.hero-stats span{font-size:.78rem;color:var(--c-ink-soft)}
+.hero-art{position:relative;min-height:300px}
+.hero-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 24px rgba(28,77,74,.14))}
+
+/* ---------- 通用板块 ---------- */
+.section{padding:var(--space-5) 0}
+.section + .section{border-top:1px solid var(--c-line-soft)}
+.sec-head{display:flex;align-items:baseline;gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-4)}
+.sec-head h2{font-size:var(--fs-h2);color:var(--c-primary-dark);position:relative;padding-left:14px}
+.sec-head h2::before{content:"";position:absolute;left:0;top:.18em;width:5px;height:1.05em;background:var(--c-accent);border-radius:3px}
+.sec-head .desc{font-size:.9rem;color:var(--c-ink-soft)}
+.sec-head .more{margin-left:auto;font-size:.88rem}
+
+.card{
+  background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);
+  box-shadow:var(--shadow-s);
+}
+.pad{padding:var(--space-3) var(--space-3) var(--space-2)}
+.tag{
+  display:inline-block;font-size:.76rem;padding:2px 9px;border-radius:999px;
+  background:var(--c-tag);color:var(--c-primary-dark);margin:0 6px 6px 0;
+}
+.tag.hot{background:var(--c-accent-soft);color:var(--c-accent)}
+.meta{font-size:.78rem;color:var(--c-ink-soft);display:flex;gap:12px;flex-wrap:wrap}
+.meta .sep{opacity:.5}
+
+/* 概览三卡 */
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-3)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-3)}
+.overview-card{padding:var(--space-3);display:flex;flex-direction:column;gap:6px;transition:transform .18s ease}
+.overview-card:hover{transform:translateY(-3px)}
+.overview-card h3{font-size:1.02rem;color:var(--c-primary-dark)}
+.overview-card p{font-size:.9rem;color:var(--c-ink-soft);margin:0}
+
+/* 精选内容 */
+.feature-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--space-3)}
+.feature-main{overflow:hidden;padding:0}
+.feature-main img{width:100%;height:220px;object-fit:cover}
+.feature-main .pad{padding:var(--space-3)}
+.feature-main h3{font-size:1.22rem;margin-bottom:6px}
+.feature-list{display:grid;gap:var(--space-2)}
+.feature-list .item{display:flex;gap:var(--space-2);padding:12px 14px;align-items:flex-start}
+.feature-list .num{
+  font-family:var(--font-serif);font-size:1.2rem;color:var(--c-accent);
+  font-weight:700;line-height:1;padding-top:3px;flex:none;width:24px;
+}
+.feature-list h3{font-size:.98rem;margin-bottom:2px}
+.feature-list p{font-size:.85rem;color:var(--c-ink-soft);margin:0}
+
+/* 最新更新 紧凑列表 */
+.updates{display:grid;gap:0;padding:4px 0}
+.updates li{
+  list-style:none;display:grid;grid-template-columns:78px minmax(0,1fr) auto;
+  gap:var(--space-2);padding:11px 4px;border-bottom:1px dashed var(--c-line);align-items:baseline;
+}
+.updates li:last-child{border-bottom:0}
+.updates time{font-size:.8rem;color:var(--c-primary);font-variant-numeric:tabular-nums}
+.updates .txt{font-size:.92rem}
+.updates .ch{font-size:.78rem;color:var(--c-ink-soft);white-space:nowrap}
+
+/* 分类入口 标签索引 */
+.cat-index{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cat-index a{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-s);
+  padding:10px 12px;font-size:.9rem;color:var(--c-ink);
+}
+.cat-index a:hover{border-color:var(--c-primary);background:var(--c-tag);text-decoration:none}
+.cat-index a span{font-size:.74rem;color:var(--c-ink-soft);font-variant-numeric:tabular-nums}
+
+/* 深度解析 */
+.analysis{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-l);padding:var(--space-4)}
+.analysis > p:first-of-type{font-size:1.04rem;color:var(--c-primary-dark)}
+.analysis h3{font-size:var(--fs-h3);margin:var(--space-4) 0 var(--space-2);color:var(--c-primary-dark);padding-bottom:6px;border-bottom:2px solid var(--c-tag)}
+.analysis h3:first-of-type{margin-top:var(--space-2)}
+.analysis blockquote{
+  margin:var(--space-3) 0;padding:var(--space-2) var(--space-3);
+  border-left:4px solid var(--c-gold);background:#fdf8e6;border-radius:0 var(--radius-s) var(--radius-s) 0;
+  font-family:var(--font-serif);color:#5a4a12;
+}
+.analysis blockquote p:last-child{margin-bottom:0}
+.compare{width:100%;border-collapse:collapse;font-size:.9rem;margin:var(--space-2) 0 var(--space-3)}
+.compare th,.compare td{border:1px solid var(--c-line);padding:8px 10px;text-align:left;vertical-align:top}
+.compare thead th{background:var(--c-tag);color:var(--c-primary-dark);font-size:.85rem}
+.check-list{counter-reset:ck;list-style:none;padding:0}
+.check-list li{position:relative;padding-left:30px;margin-bottom:10px;font-size:.93rem}
+.check-list li::before{
+  counter-increment:ck;content:counter(ck);
+  position:absolute;left:0;top:2px;width:21px;height:21px;border-radius:50%;
+  background:var(--c-primary);color:#fff;font-size:.72rem;display:grid;place-items:center;font-weight:600;
+}
+
+/* 体验指南 编号步骤 */
+.steps{counter-reset:st;display:grid;gap:var(--space-2);list-style:none;padding:0}
+.steps li{
+  counter-increment:st;position:relative;padding:14px 16px 14px 56px;
+  background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);
+}
+.steps li::before{
+  content:counter(st,decimal-leading-zero);
+  position:absolute;left:14px;top:14px;font-family:var(--font-serif);
+  font-size:1.1rem;font-weight:700;color:var(--c-accent);
+}
+.steps h3{font-size:.98rem;margin-bottom:2px}
+.steps p{font-size:.88rem;color:var(--c-ink-soft);margin:0}
+
+/* FAQ */
+.faq details{background:var(--c-surface);border:1px solid var(--c-line);border-radius:var(--radius-m);margin-bottom:10px;overflow:hidden}
+.faq summary{
+  cursor:pointer;padding:13px 44px 13px 16px;font-weight:600;font-size:.96rem;
+  list-style:none;position:relative;color:var(--c-primary-dark);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  font-size:1.25rem;color:var(--c-accent);font-weight:400;line-height:1;
+}
+.faq details[open] summary::after{content:"–"}
+.faq .ans{padding:0 16px 14px;font-size:.91rem;color:var(--c-ink-soft);border-top:1px dashed var(--c-line);padding-top:12px;margin-top:0}
+
+/* 评论 */
+.comments{display:grid;gap:var(--space-2)}
+.comment{display:flex;gap:var(--space-2);padding:var(--space-2) var(--space-3)}
+.avatar{
+  flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  background:var(--c-primary);color:#fff;font-weight:600;font-size:.9rem;
+}
+.avatar.v2{background:var(--c-accent)}
+.avatar.v3{background:#5b6f8c}
+.avatar.v4{background:#7a6a3a}
+.comment h4{font-size:.88rem;margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.comment h4 .badge{font-size:.7rem;font-weight:400;background:var(--c-tag);color:var(--c-primary-dark);padding:1px 7px;border-radius:999px}
+.comment p{font-size:.89rem;margin:0;color:var(--c-ink)}
+.comment .t{font-size:.75rem;color:var(--c-ink-soft);font-weight:400}
+
+/* 相关资讯 */
+.news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-3)}
+.news-card{overflow:hidden;padding:0;transition:transform .18s ease}
+.news-card:hover{transform:translateY(-3px)}
+.news-card img{width:100%;height:130px;object-fit:cover}
+.news-card .pad{padding:12px 14px 14px}
+.news-card h3{font-size:.95rem;margin-bottom:4px}
+.news-card p{font-size:.83rem;color:var(--c-ink-soft);margin:0 0 6px}
+
+/* 榜单 + 时间线 补充 */
+.supplement{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-3)}
+.rank-list{list-style:none;margin:0;padding:0;counter-reset:rk}
+.rank-list li{
+  counter-increment:rk;display:flex;align-items:center;gap:12px;
+  padding:9px 4px;border-bottom:1px dashed var(--c-line);font-size:.9rem;
+}
+.rank-list li:last-child{border-bottom:0}
+.rank-list li::before{
+  content:counter(rk);font-family:var(--font-serif);font-weight:700;color:var(--c-ink-soft);
+  width:22px;text-align:center;font-size:.95rem;
+}
+.rank-list li:nth-child(-n+3)::before{color:var(--c-accent)}
+.rank-list .val{margin-left:auto;font-size:.79rem;color:var(--c-ink-soft);font-variant-numeric:tabular-nums}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--c-tag)}
+.timeline li{position:relative;padding:0 0 14px 12px;font-size:.88rem}
+.timeline li::before{
+  content:"";position:absolute;left:-25px;top:6px;width:10px;height:10px;border-radius:50%;
+  background:var(--c-accent);border:2px solid var(--c-surface);
+}
+.timeline time{display:block;font-size:.76rem;color:var(--c-primary);font-weight:600}
+
+/* 相关推荐 标签索引 */
+.reco{display:flex;flex-wrap:wrap;gap:9px}
+.reco a{
+  font-size:.85rem;padding:6px 13px;border-radius:999px;
+  border:1px solid var(--c-line);background:var(--c-surface);color:var(--c-ink);
+}
+.reco a:hover{border-color:var(--c-accent);color:var(--c-accent);background:var(--c-accent-soft);text-decoration:none}
+
+/* 侧栏 / 布局 */
+.layout{
+  display:grid;grid-template-columns:minmax(0,1fr) 288px;gap:var(--space-4);
+  align-items:start;padding:var(--space-4) 0 var(--space-5);
+}
+.side{display:grid;gap:var(--space-3);position:sticky;top:126px}
+.side-card{padding:var(--space-3)}
+.side-card h3{font-size:.96rem;color:var(--c-primary-dark);margin-bottom:10px;padding-bottom:7px;border-bottom:1px dashed var(--c-line)}
+.side-nav ul{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.side-nav a{display:block;font-size:.88rem;padding:6px 10px;border-radius:var(--radius-s);color:var(--c-ink-soft)}
+.side-nav a:hover{background:var(--c-tag);text-decoration:none}
+.side-nav a.current{background:var(--c-tag);color:var(--c-primary-dark);font-weight:600;border-left:3px solid var(--c-accent)}
+.side-card .mini li{list-style:none;font-size:.85rem;padding:6px 0;border-bottom:1px dashed var(--c-line-soft);display:flex;gap:8px}
+.side-card .mini li:last-child{border-bottom:0}
+.side-card .mini{padding:0;margin:0}
+.side-card .mini time{font-size:.75rem;color:var(--c-primary);flex:none;font-variant-numeric:tabular-nums}
+.login-tip{background:linear-gradient(150deg,#1c4d4a,#123634);color:#e6efed;border:0}
+.login-tip h3{color:#fff;border-color:rgba(255,255,255,.2)}
+.login-tip p{font-size:.85rem;color:#c7d8d4;margin-bottom:12px}
+.login-tip .btn{background:var(--c-gold);border-color:var(--c-gold);color:#2a2205;width:100%}
+.login-tip .btn:hover{background:#dfa900}
+
+/* 页尾 */
+footer.site-foot{background:var(--c-primary-dark);color:#c9d8d4;padding:var(--space-5) 0 var(--space-3);font-size:.87rem}
+.foot-grid{display:grid;grid-template-columns:1.3fr repeat(3,minmax(0,1fr));gap:var(--space-4)}
+.foot-brand .brand-name{color:#fff;font-size:1.12rem}
+.foot-brand p{margin-top:10px;color:#a8bdb8;font-size:.84rem;max-width:26em}
+.foot-col h4{color:#fff;font-size:.9rem;margin-bottom:10px;letter-spacing:.5px}
+.foot-col ul{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.foot-col a{color:#b7cac5;font-size:.84rem}
+.foot-col a:hover{color:var(--c-gold);text-decoration:none}
+.foot-bottom{
+  margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(255,255,255,.14);
+  display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-size:.79rem;color:#8ba5a0;
+}
+
+/* 回顶 */
+#toTop{
+  position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;
+  border:0;background:var(--c-primary);color:#fff;font-size:1.05rem;cursor:pointer;
+  box-shadow:var(--shadow-m);opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .2s,transform .2s,visibility .2s;z-index:90;
+}
+#toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+
+/* 响应式 */
+@media(max-width:1024px){
+  .layout{grid-template-columns:1fr}
+  .side{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat-index{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr;padding:var(--space-4) 0}
+  .hero-art{order:-1;min-height:0;max-width:420px}
+  .grid3,.grid2,.feature-grid,.news-grid,.supplement{grid-template-columns:1fr}
+  nav.main-nav{display:none;margin-left:0;width:100%}
+  nav.main-nav.open{display:block}
+  nav.main-nav ul{flex-direction:column;gap:0;border-top:1px solid var(--c-line);padding-top:6px}
+  nav.main-nav a{padding:10px 8px;border-radius:0;border-bottom:1px solid var(--c-line-soft)}
+  .menu-btn{display:inline-block}
+  .head-actions{margin-left:auto}
+  .search-box input{width:140px}
+  .side{grid-template-columns:1fr}
+  .updates li{grid-template-columns:66px minmax(0,1fr);}
+  .updates .ch{grid-column:2;font-size:.74rem}
+}
+@media(max-width:560px){
+  .wrap{width:min(1180px,100% - 22px)}
+  .cat-index{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-stats{gap:var(--space-3)}
+  .hero-stats b{font-size:1.25rem}
+  .analysis{padding:var(--space-3)}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column}
+  .comment{padding:12px}
+  #toTop{right:12px;bottom:12px;width:40px;height:40px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .overview-card:hover,.news-card:hover{transform:none}
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"maya论坛登录入口",
+  "description":"整理账号登录流程、验证码与密码找回、版块通行权限与常见登录故障排查的说明页。",
+  "inLanguage":"zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"maya论坛登录入口收不到短信验证码怎么办？",
+      "acceptedAnswer":{"@type":"Answer","text":"先检查手机号是否填写了 +86 之外的区号导致号码错位，其次在 60 秒倒计时结束后再点一次获取验证码。若连续两次失败，登录页下方提供语音验证码通道，可切换为语音播报。"}
+    },
+    {
+      "@type":"Question",
+      "name":"登录后看不到某些版块是什么原因？",
+      "acceptedAnswer":{"@type":"Answer","text":"社区把版块分为公开、注册可见、等级解锁三类。账号等级低于 Lv.2 时，交易区与资源下载区默认隐藏，需完成邮箱验证并累计 5 次有效回帖后解锁。"}
+    },
+    {
+      "@type":"Question",
+      "name":"忘记密码还能通过原邮箱找回吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"邮箱仍可接收邮件时，用注册邮箱走找回流程即可，重置链接有效期为 30 分钟。邮箱已停用的账号需提交人工审核，附上注册时间与近三个月发帖截图。"}
+    },
+    {
+      "@type":"Question",
+      "name":"同一账号在多台设备登录会被限制吗？",
+      "acceptedAnswer":{"@type":"Answer","text":"账号允许同时保持 2 台设备在线，第 3 台登录时最早的一台会被挤下线。异地登录会触发二次验证，需在 10 分钟内完成手机验证。"}
+    }
+  ]
+}
+</script>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到主内容</a>
+
+<div class="sticky-top">
+  <div class="notice" role="status" aria-label="站内公告">
+    <div class="wrap">
+      <span class="dot" aria-hidden="true"></span>
+      <span><b>maya论坛登录入口</b> 11 月 6 日更新：短信通道恢复，验证码有效期调整为 5 分钟；11 月 7 日 22:00—23:00 进行登录服务维护。</span>
+      <a href="/#updates">查看更新明细</a>
+    </div>
+  </div>
+  <header class="site-head">
+    <div class="wrap head-inner">
+      <a class="brand" href="/#top" aria-label="maya论坛登录入口 首页">
+        <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#1c4d4a"/>
+          <path d="M16 44V20h6l10 14 10-14h6v24h-6V30l-10 13-10-13v14z" fill="#f2b705"/>
+          <circle cx="48" cy="18" r="4" fill="#c9561f"/>
+        </svg>
+        <span>
+          <span class="brand-name">maya论坛登录入口</span>
+          <span class="brand-sub">MAYA COMMUNITY</span>
+        </span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">菜单</button>
+      <nav class="main-nav" id="mainNav" aria-label="主题导航">
+        <ul>
+          <li><a href="/#overview" class="active">登录概览</a></li>
+          <li><a href="/#featured">精选推荐</a></li>
+          <li><a href="/#updates">最新更新</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+        </ul>
+      </nav>
+      <div class="head-actions">
+        <form class="search-box" id="searchForm" role="search" aria-label="站内搜索">
+          <input type="search" id="searchInput" placeholder="搜索版块或问题" aria-label="搜索关键词">
+          <button type="submit" aria-label="搜索">搜</button>
+        </form>
+        <a class="btn accent" href="/#guide">登录步骤</a>
+      </div>
+    </div>
+    <div class="wrap"><p class="search-msg" id="searchMsg" role="status" aria-live="polite"></p></div>
+  </header>
+</div>
+
+<main id="main">
+  <!-- 首屏 -->
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="kicker">账号通行 · 版块权限 · 故障自检</span>
+        <h1 id="heroTitle">maya论坛登录入口</h1>
+        <p class="lead">从账号密码、短信验证码到等级解锁，把进入社区要过的几道门一次说清。适用于 2026 年 11 月版登录页，含 4 类常见故障的排查顺序与版块通行规则。</p>
+        <div class="hero-cta">
+          <a class="btn" href="/#guide">按步骤登录</a>
+          <a class="btn ghost" href="/#faq">验证码问题</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>12</b><span>个公开版块</span></div>
+          <div><b>3</b><span>级账号权限</span></div>
+          <div><b>5 分钟</b><span>验证码有效期</span></div>
+          <div><b>11/06</b><span>通道恢复日期</span></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 340" role="img">
+          <rect x="30" y="40" width="360" height="250" rx="18" fill="#ffffff" stroke="#dcd8cc"/>
+          <rect x="30" y="40" width="360" height="46" rx="18" fill="#1c4d4a"/>
+          <rect x="30" y="70" width="360" height="16" fill="#1c4d4a"/>
+          <circle cx="56" cy="63" r="5" fill="#f2b705"/>
+          <circle cx="74" cy="63" r="5" fill="#c9561f"/>
+          <circle cx="92" cy="63" r="5" fill="#e6efed"/>
+          <rect x="56" y="112" width="150" height="13" rx="6" fill="#eaf1ef"/>
+          <rect x="56" y="140" width="236" height="30" rx="8" fill="#f6f4ee" stroke="#dcd8cc"/>
+          <rect x="56" y="184" width="236" height="30" rx="8" fill="#f6f4ee" stroke="#dcd8cc"/>
+          <rect x="56" y="228" width="120" height="30" rx="15" fill="#1c4d4a"/>
+          <rect x="190" y="228" width="102" height="30" rx="15" fill="#f2b705"/>
+          <rect x="308" y="112" width="62" height="62" rx="10" fill="#fbe8dd" stroke="#c9561f" stroke-dasharray="4 4"/>
+          <path d="M330 133v20M320 143h20" stroke="#c9561f" stroke-width="3" stroke-linecap="round"/>
+          <rect x="308" y="188" width="62" height="70" rx="10" fill="#eaf1ef"/>
+          <rect x="318" y="200" width="42" height="6" rx="3" fill="#1c4d4a" opacity=".5"/>
+          <rect x="318" y="214" width="42" height="6" rx="3" fill="#1c4d4a" opacity=".35"/>
+          <rect x="318" y="228" width="28" height="6" rx="3" fill="#1c4d4a" opacity=".35"/>
+          <circle cx="380" cy="300" r="16" fill="#f2b705" opacity=".7"/>
+          <circle cx="44" cy="316" r="10" fill="#c9561f" opacity=".5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+    <div class="content-col">
+
+      <!-- 1 领域概览 -->
+      <section class="section" id="overview" aria-labelledby="overviewH" data-search-item data-keywords="登录概览 账号 版块 权限 社区">
+        <div class="sec-head">
+          <h2 id="overviewH">登录概览：一道门背后的三层规则</h2>
+          <span class="desc">账号层、验证层、权限层</span>
+        </div>
+        <div class="grid3">
+          <article class="card overview-card">
+            <h3>账号层：用户名与手机号二选一</h3>
+            <p>登录框支持用户名、绑定手机号、注册邮箱三种标识，密码区分大小写。2026 年 10 月起停止使用旧版独立 UID 登录。</p>
+            <div class="meta"><span>规则版本 v3.2</span><span class="sep">|</span><span>10/28 生效</span></div>
+          </article>
+          <article class="card overview-card">
+            <h3>验证层：图形码与短信码叠加</h3>
+            <p>连续两次密码错误后触发图形验证；异地 IP 登录追加短信六位码。验证码 5 分钟内有效，超时需重新获取。</p>
+            <div class="meta"><span>短信通道</span><span class="sep">|</span><span>11/06 恢复</span></div>
+          </article>
+          <article class="card overview-card">
+            <h3>权限层：公开、注册可见、等级解锁</h3>
+            <p>版块分三档。未登录仅见 12 个公开区，注册后开放讨论区，Lv.2 解锁交易区与资源下载区，等级按有效回帖累计。</p>
+            <div class="meta"><span>Lv.2 门槛</span><span class="sep">|</span><span>5 次有效回帖</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 2 精选内容推荐 -->
+      <section class="section" id="featured" aria-labelledby="featuredH" data-search-item data-keywords="精选 验证码 密码找回 版块权限">
+        <div class="sec-head">
+          <h2 id="featuredH">精选内容推荐</h2>
+          <span class="desc">按近期访问与回帖量挑选</span>
+          <a class="more" href="/#updates">更多更新 →</a>
+        </div>
+        <div class="feature-grid">
+          <article class="card feature-main">
+            <img src="https://picsum.photos/seed/maya-login-guide/720/360" width="720" height="360" loading="lazy" alt="论坛登录页与验证码输入界面的示意图">
+            <div class="pad">
+              <span class="tag hot">本周置顶</span>
+              <h3>短信验证码收不到：从区号到语音通道的完整排查</h3>
+              <p>11 月 6 日短信通道恢复后，仍有用户反馈延迟。按运营商分时段测试的结果是：移动号码平均 8 秒到达，联通 12 秒，虚拟运营商号码延迟可到 40 秒以上。先把区号填写错误排除，再考虑通道问题。</p>
+              <div class="meta"><span>编辑整理</span><span class="sep">|</span><span>11/06</span><span class="sep">|</span><span>阅读 4.2k</span></div>
+            </div>
+          </article>
+          <div class="feature-list">
+            <article class="card item">
+              <span class="num">01</span>
+              <div>
+                <h3>邮箱停用后的密码找回流程</h3>
+                <p>提交注册时间、最近三个月发帖截图，人工审核约 1—2 个工作日。</p>
+              </div>
+            </article>
+            <article class="card item">
+              <span class="num">02</span>
+              <div>
+                <h3>多设备登录被挤下线的判定</h3>
+                <p>同时在线上限 2 台，第三台登录时最早设备退出，可在安全中心查看设备列表。</p>
+              </div>
+            </article>
+            <article class="card item">
+              <span class="num">03</span>
+              <div>
+                <h3>Lv.2 等级解锁交易区实操</h3>
+                <p>完成邮箱验证并累计 5 次有效回帖，回帖被删不计入，30 天内有效。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 最新更新 -->
+      <section class="section" id="updates" aria-labelledby="updatesH" data-search-item data-keywords="最新更新 维护 公告 版本 验证码">
+        <div class="sec-head">
+          <h2 id="updatesH">最新更新</h2>
+          <span class="desc">登录相关变更与站务公告</span>
+        </div>
+        <ul class="updates card pad">
+          <li>
+            <time datetime="2026-11-07">今天 11/07</time>
+            <span class="txt">登录服务维护窗口公布，22:00—23:00 期间验证码接口暂停，已登录会话不受影响。</span>
+            <span class="ch">站务公告</span>
+          </li>
+          <li>
+            <time datetime="2026-11-06">昨天 11/06</time>
+            <span class="txt">短信通道恢复，验证码有效期由 3 分钟调整为 5 分钟，倒计时结束后可重新获取。</span>
+            <span class="ch">登录机制</span>
+          </li>
+          <li>
+            <time datetime="2026-11-04">11/04</time>
+            <span class="txt">安全中心新增设备管理页，可查看最近 30 天登录设备、IP 归属地与首次登录时间。</span>
+            <span class="ch">账号安全</span>
+          </li>
+          <li>
+            <time datetime="2026-11-02">11/02</time>
+            <span class="txt">资源下载区解锁条件更新：有效回帖从 10 次降为 5 次，恶意灌水帖仍不计入。</span>
+            <span class="ch">版块权限</span>
+          </li>
+          <li>
+            <time datetime="2026-10-29">10/29</time>
+            <span class="txt">图形验证码改用滑动拼图，旧版四位字符验证下线，无障碍通道保留语音版。</span>
+            <span class="ch">登录机制</span>
+          </li>
+          <li>
+            <time datetime="2026-10-28">10/28</time>
+            <span class="txt">停止 UID 直接登录，历史账号需先用用户名或绑定手机号登录一次完成迁移。</span>
+            <span class="ch">账号规则</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 4 分类入口 -->
+      <section class="section" id="cats" aria-labelledby="catsH" data-search-item data-keywords="分类 版块 入口 交易区 资源下载">
+        <div class="sec-head">
+          <h2 id="catsH">分类入口</h2>
+          <span class="desc">按版块热度排列，括号内为近 7 天新帖数</span>
+        </div>
+        <div class="cat-index">
+          <a href="/#analysis">账号安全与登录 <span>86</span></a>
+          <a href="/#guide">新手指引 <span>42</span></a>
+          <a href="/#faq">验证码互助 <span>61</span></a>
+          <a href="/#analysis">版块权限答疑 <span>37</span></a>
+          <a href="/#comments">用户反馈区 <span>54</span></a>
+          <a href="/#news">站务公告 <span>19</span></a>
+          <a href="/#rank">活跃会员榜 <span>—</span></a>
+          <a href="/#reco">资源下载区 <span>73</span></a>
+          <a href="/#cats">交易区 <span>28</span></a>
+          <a href="/#timeline">版本更新日志 <span>12</span></a>
+          <a href="/#featured">邮箱与手机绑定 <span>33</span></a>
+          <a href="/#supplement">密码找回专区 <span>25</span></a>
+        </div>
+      </section>
+
+      <!-- 5 深度解析（唯一主体阅读区） -->
+      <section class="section" id="analysis" aria-labelledby="analysisH" data-search-item data-keywords="深度解析 登录失败 验证码 异地登录 会话">
+        <div class="sec-head">
+          <h2 id="analysisH">深度解析：登录失败的三类归因，别都算到验证码头上</h2>
+          <span class="desc">基于 10/28—11/07 的 214 条反馈记录</span>
+        </div>
+        <article class="analysis">
+          <p>10 月 28 日至 11 月 7 日，用户反馈区共记录 214 条与登录相关的帖子。逐条归类后，验证码问题只占 31%，剩下近七成集中在账号状态与设备会话上。把这个比例说清楚，能省掉大量无效的重复获取验证码操作。</p>
+
+          <h3>一、密码错误两次之后，真正卡住的是图形验证</h3>
+          <p>登录页在连续两次密码错误后弹出滑动拼图，这一点 10 月 29 日之后没有变过。有用户反映“密码明明对却登不进去”，翻看其截图，拼图滑块停在中段未对齐，提交自然失败。拼图容差约为 3 像素，手指拖动最后松手的位置要贴住缺口右边缘。手机端在 Safari 上出现过两次松手回弹，改用 Chrome 后未复现。</p>
+          <p>值得记录的是无障碍通道的位置：拼图下方有一个“听语音验证”链接，点击后通过电话播报四位数字，适用于视力障碍或触屏失灵的设备。这条通道在 10 月 29 日的版本说明里被写在最后一段，很多人没看到。</p>
+
+          <h3>二、异地登录判定看的是 IP 归属地，不是 GPS</h3>
+          <table class="compare">
+            <caption class="meta" style="caption-side:bottom;text-align:left;padding-top:6px">2026 年 11 月版异地登录判定条件对照</caption>
+            <thead>
+              <tr><th scope="col">触发条件</th><th scope="col">系统动作</th><th scope="col">用户需做什么</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>同省不同城市登录</td><td>仅记录设备日志</td><td>无需操作</td></tr>
+              <tr><td>跨省登录且 7 天未在该地登录</td><td>要求短信六位码</td><td>5 分钟内输入，超时重发</td></tr>
+              <tr><td>境外 IP 登录</td><td>短信码 + 邮箱确认链接</td><td>先点邮件链接再输短信码</td></tr>
+              <tr><td>同一 IP 短时间多账号尝试</td><td>临时锁定 30 分钟</td><td>等待解锁，不累计错误次数</td></tr>
+            </tbody>
+          </table>
+          <p>反馈区里有一条容易看漏的细节：用代理工具切换节点后，登录地被识别为境外，此时系统会同时要求短信码与邮箱确认。邮箱确认链接在 30 分钟内有效，比短信码的 5 分钟宽松，顺序上应该先处理邮件。</p>
+
+          <h3>三、被挤下线不是故障，是并发设备上限</h3>
+          <p>111 条“登录后没多久又掉线”的反馈中，有 64 条来自同一账号在手机与两台电脑之间切换。账号并发上限是 2 台，第三台登录时会挤掉最早的那台。安全中心的设备列表能直接看到顺序，删除旧设备并不能提高上限，只是让下一次登录少挤掉一台。</p>
+          <blockquote>
+            <p>“我以为是号被盗了，结果是平板一直挂在线。”——反馈区 ID「雾港灯塔」，11/03</p>
+          </blockquote>
+          <p>这条判断可以被反驳：如果掉线发生在单设备上，且设备列表只有一条记录，那更可能是浏览器禁用了 Cookie。会话靠 Cookie 维持，隐私模式关闭窗口即失效，这一点在移动端浏览器更常见。</p>
+
+          <h3>四、可核对的一套自查顺序</h3>
+          <ol class="check-list">
+            <li>确认输入的是用户名或绑定手机号，而不是旧版 UID；UID 登录已于 10/28 停止。</li>
+            <li>检查拼图滑块是否贴住缺口右边缘，容差约 3 像素。</li>
+            <li>查看短信是否被拦截，虚拟运营商号码延迟可到 40 秒，先等满 60 秒再重发。</li>
+            <li>进入安全中心核对设备列表，超过 2 台的先删除不用的旧设备。</li>
+            <li>仍失败时截图错误提示，在用户反馈区发帖，注明浏览器与系统版本。</li>
+          </ol>
+          <p>这套顺序的价值在于把“先重发验证码”这个最常见动作放到第三位。前三类归因里，只有一类与验证码有关，先重发反而会在 5 分钟有效期内反复覆盖，掩盖真正的错误提示。</p>
+        </article>
+      </section>
+
+      <!-- 6 体验指南 -->
+      <section class="section" id="guide" aria-labelledby="guideH" data-search-item data-keywords="登录步骤 教程 验证码 密码 新手">
+        <div class="sec-head">
+          <h2 id="guideH">体验指南：五步完成一次登录</h2>
+          <span class="desc">按 11 月版登录页顺序整理</span>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>打开登录页，选择登录方式</h3>
+            <p>默认显示账号密码登录，右侧可切换手机号快捷登录。快捷登录仍需密码，只是把标识换成手机号。</p>
+          </li>
+          <li>
+            <h3>填写账号与密码</h3>
+            <p>用户名区分全角半角，密码区分大小写。输入框右侧的眼睛图标可临时查看密码，公共电脑上用完记得切回。</p>
+          </li>
+          <li>
+            <h3>完成滑动拼图</h3>
+            <p>连续两次密码错误后出现，拖动滑块至缺口对齐。松手后若提示“拼图未对齐”，重新拖动，不计错误次数。</p>
+          </li>
+          <li>
+            <h3>输入短信验证码（视情况）</h3>
+            <p>异地或新设备登录才需要。六位数字，5 分钟内有效，60 秒倒计时结束后可重发，每天最多 8 次。</p>
+          </li>
+          <li>
+            <h3>进入后检查设备列表</h3>
+            <p>首次在新设备登录，建议进安全中心确认设备数量不超过 2 台，删除不再使用的旧设备。</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 7 FAQ -->
+      <section class="section faq" id="faq" aria-labelledby="faqH" data-search-item data-keywords="FAQ 验证码 密码找回 版块权限 设备">
+        <div class="sec-head">
+          <h2 id="faqH">常见问题</h2>
+          <span class="desc">按反馈区提问频率排序</span>
+        </div>
+        <details data-search-item data-keywords="短信验证码 收不到 区号 语音">
+          <summary>收不到短信验证码怎么办？</summary>
+          <p class="ans">先检查手机号是否多填了区号导致号码错位，再确认手机号已被其他账号占用。倒计时 60 秒结束后重发一次，仍无响应可点登录框下方的“语音验证码”，系统会电话播报六位数字。虚拟运营商号码到达时间可能超过 40 秒，先等满再重发。</p>
+        </details>
+        <details data-search-item data-keywords="版块 权限 等级 解锁 交易区">
+          <summary>登录后看不到交易区与资源下载区？</summary>
+          <p class="ans">这两个版块按账号等级开放。等级低于 Lv.2 时默认隐藏，需要在个人中心完成邮箱验证，并累计 5 次有效回帖。被删除的灌水帖不计入，计数周期为 30 天。升级后通常即时生效，最长延迟 10 分钟。</p>
+        </details>
+        <details data-search-item data-keywords="密码找回 邮箱 停用 人工审核">
+          <summary>忘记密码，注册邮箱也停用了怎么处理？</summary>
+          <p class="ans">邮箱仍能收信时走常规找回，重置链接 30 分钟内有效。邮箱已停用则提交人工审核，材料包括注册大致时间、最近三个月发帖截图、常用登录设备型号，审核约 1—2 个工作日，结果通过站内信通知。</p>
+        </details>
+        <details data-search-item data-keywords="多设备 登录 挤下线 设备上限">
+          <summary>同一账号能在几台设备上同时在线？</summary>
+          <p class="ans">并发上限 2 台。第三台登录时最早登录的那台会被挤下线，安全中心的设备列表能看到先后顺序。删除旧设备不会提高上限，只是让下一次登录少挤掉一台。</p>
+        </details>
+        <details data-search-item data-keywords="拼图 验证 滑块 对齐 失败">
+          <summary>滑动拼图总是提示未对齐？</summary>
+          <p class="ans">拼图容差约 3 像素，松手位置要贴住缺口右边缘。手机端放大页面后坐标会偏移，建议恢复 100% 缩放再拖。若多次失败，可改用下方的语音验证通道，不累计错误次数。</p>
+        </details>
+        <details data-search-item data-keywords="账号 封禁 申诉 反馈区">
+          <summary>账号提示被限制登录，怎么申诉？</summary>
+          <p class="ans">限制登录通常与同 IP 短时间多账号尝试有关，30 分钟后自动解除。如属误判，在用户反馈区发帖并附上错误提示截图，注明发生时间，站务会在 24 小时内回复。</p>
+        </details>
+      </section>
+
+      <!-- 8 用户评论 -->
+      <section class="section" id="comments" aria-labelledby="commentsH" data-search-item data-keywords="用户评论 反馈 验证码 设备 拼图">
+        <div class="sec-head">
+          <h2 id="commentsH">用户评论</h2>
+          <span class="desc">摘自用户反馈区，已获发布者同意转载</span>
+        </div>
+        <div class="comments">
+          <article class="card comment">
+            <div class="avatar" aria-hidden="true">雾</div>
+            <div>
+              <h4>雾港灯塔 <span class="badge">Lv.3</span> <span class="t">11/03 21:14</span></h4>
+              <p>平板挂了一周没关，手机上怎么登都被挤掉，看到设备列表才明白。删掉旧设备后一次就进，问题根本不在验证码。</p>
+            </div>
+          </article>
+          <article class="card comment">
+            <div class="avatar v2" aria-hidden="true">青</div>
+            <div>
+              <h4>青柠不加冰 <span class="badge">Lv.1</span> <span class="t">11/05 09:47</span></h4>
+              <p>拼图那个我拖了五遍都提示未对齐，后来发现手机页面被放大了。恢复 100% 缩放后一次过，这个提示太不明显。</p>
+            </div>
+          </article>
+          <article class="card comment">
+            <div class="avatar v3" aria-hidden="true">北</div>
+            <div>
+              <h4>北纬三十七 <span class="badge">Lv.4</span> <span class="t">11/06 14:02</span></h4>
+              <p>短信恢复后确实快了不少，联通号大概十几秒到。倒是语音验证那条通道一直没人提，视力不好的用户挺需要。</p>
+            </div>
+          </article>
+          <article class="card comment">
+            <div class="avatar v4" aria-hidden="true">陈</div>
+            <div>
+              <h4>陈小满 <span class="badge">Lv.2</span> <span class="t">11/04 18:30</span></h4>
+              <p>资源下载区降到 5 次回帖就能解锁，比之前友好。但灌水帖不算，随便回几句还是白搭，得真讨论。</p>
+            </div>
+          </article>
+          <article class="card comment">
+            <div class="avatar" aria-hidden="true">修</div>
+            <div>
+              <h4>修理铺阿海 <span class="badge">Lv.2</span> <span class="t">11/02 11:08</span></h4>
+              <p>10 月 28 日停用 UID 登录那天我被卡了半小时，一直以为是自己记错密码。公告写得挺靠后，能不能在登录框直接提示。</p>
+            </div>
+          </article>
+          <article class="card comment">
+            <div class="avatar v3" aria-hidden="true">纸</div>
+            <div>
+              <h4>纸飞机计划 <span class="badge">Lv.1</span> <span class="t">11/01 23:51</span></h4>
+              <p>异地登录要邮箱确认加短信码，出差的时候两个都过期了。流程能理解，就是 5 分钟对时差党确实紧张。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 9 相关资讯 -->
+      <section class="section" id="news" aria-labelledby="newsH" data-search-item data-keywords="资讯 安全中心 版本 公告 设备管理">
+        <div class="sec-head">
+          <h2 id="newsH">相关资讯</h2>
+          <span class="desc">账号安全与版本变更</span>
+        </div>
+        <div class="news-grid">
+          <article class="card news-card">
+            <img src="https://picsum.photos/seed/maya-device-list/480/260" width="480" height="260" loading="lazy" alt="安全中心设备列表页面示意图">
+            <div class="pad">
+              <h3>设备管理页上线，30 天登录记录可查</h3>
+              <p>显示设备型号、IP 归属地与首次登录时间，可手动删除旧设备。</p>
+              <div class="meta"><span>11/04</span><span class="sep">|</span><span>账号安全</span></div>
+            </div>
+          </article>
+          <article class="card news-card">
+            <img src="https://picsum.photos/seed/maya-sms-gateway/480/260" width="480" height="260" loading="lazy" alt="短信验证码发送通道的流程图">
+            <div class="pad">
+              <h3>短信通道恢复，验证码有效期延长至 5 分钟</h3>
+              <p>倒计时改为 60 秒，每日发送上限 8 次，语音通道同步恢复。</p>
+              <div class="meta"><span>11/06</span><span class="sep">|</span><span>登录机制</span></div>
+            </div>
+          </article>
+          <article class="card news-card">
+            <img src="https://picsum.photos/seed/maya-level-rule/480/260" width="480" height="260" loading="lazy" alt="账号等级与版块解锁规则的对照图">
+            <div class="pad">
+              <h3>资源下载区解锁条件下调至 5 次有效回帖</h3>
+              <p>恶意灌水与重复内容仍不计入，计数周期保持 30 天。</p>
+              <div class="meta"><span>11/02</span><span class="sep">|</span><span>版块权限</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10 相关推荐 -->
+      <section class="section" id="reco" aria-labelledby="recoH" data-search-item data-keywords="相关推荐 标签 验证码 找回 解锁">
+        <div class="sec-head">
+          <h2 id="recoH">相关推荐</h2>
+          <span class="desc">常与登录一起出现的问题</span>
+        </div>
+        <div class="reco">
+          <a href="/#faq">短信验证码收不到</a>
+          <a href="/#faq">滑动拼图未对齐</a>
+          <a href="/#faq">注册邮箱停用找回</a>
+          <a href="/#analysis">异地登录二次验证</a>
+          <a href="/#analysis">设备并发上限 2 台</a>
+          <a href="/#faq">交易区等级解锁</a>
+          <a href="/#faq">资源下载区回帖门槛</a>
+          <a href="/#comments">同 IP 多账号锁定</a>
+          <a href="/#guide">手机号快捷登录</a>
+          <a href="/#timeline">UID 登录停用迁移</a>
+        </div>
+      </section>
+
+      <!-- 11 补充：榜单 + 时间线 -->
+      <section class="section" id="supplement" aria-labelledby="supH" data-search-item data-keywords="活跃榜 时间线 版本 反馈">
+        <div class="sec-head">
+          <h2 id="supH">活跃会员榜与版本时间线</h2>
+          <span class="desc">近 7 天有效回帖统计，数据截至 11/07</span>
+        </div>
+        <div class="supplement">
+          <div class="card pad">
+            <h3 id="rank" style="font-size:1rem;color:var(--c-primary-dark);margin-bottom:10px">反馈区活跃榜</h3>
+            <ol class="rank-list">
+              <li>雾港灯塔 <span class="val">有效回帖 46</span></li>
+              <li>北纬三十七 <span class="val">有效回帖 38</span></li>
+              <li>青柠不加冰 <span class="val">有效回帖 31</span></li>
+              <li>陈小满 <span class="val">有效回帖 24</span></li>
+              <li>修理铺阿海 <span class="val">有效回帖 19</span></li>
+              <li>纸飞机计划 <span class="val">有效回帖 15</span></li>
+            </ol>
+          </div>
+          <div class="card pad" id="timeline">
+            <h3 style="font-size:1rem;color:var(--c-primary-dark);margin-bottom:10px">版本时间线</h3>
+            <ul class="timeline">
+              <li><time datetime="2026-11-07">11/07</time>登录服务维护窗口公布，22:00—23:00 验证码接口暂停。</li>
+              <li><time datetime="2026-11-06">11/06</time>短信通道恢复，验证码有效期调整为 5 分钟。</li>
+              <li><time datetime="2026-11-04">11/04</time>安全中心上线设备管理页，保留 30 天登录记录。</li>
+              <li><time datetime="2026-11-02">11/02</time>资源下载区解锁条件下调至 5 次有效回帖。</li>
+              <li><time datetime="2026-10-29">10/29</time>图形验证改为滑动拼图，保留语音无障碍通道。</li>
+              <li><time datetime="2026-10-28">10/28</time>停止 UID 直接登录，账号需完成一次标识迁移。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 侧栏：DOM 在主内容之后 -->
+    <aside class="side" aria-label="侧栏导航与提示">
+      <div class="card side-card login-tip">
+        <h3>登录前先看这三条</h3>
+        <p>11/07 22:00 起验证码接口维护，建议提前登录；短信码 5 分钟有效；设备并发上限 2 台。</p>
+        <a class="btn" href="/#guide">查看登录步骤</a>
+      </div>
+      <nav class="card side-card side-nav" id="sideNav" aria-label="页内导航">
+        <h3>页内导航</h3>
+        <ul>
+          <li><a href="/#overview">登录概览</a></li>
+          <li><a href="/#featured">精选内容</a></li>
+          <li><a href="/#updates">最新更新</a></li>
+          <li><a href="/#cats">分类入口</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">用户评论</a></li>
+          <li><a href="/#supplement">活跃榜与时间线</a></li>
+        </ul>
+      </nav>
+      <div class="card side-card">
+        <h3>近期站内动态</h3>
+        <ul class="mini">
+          <li><time datetime="2026-11-06">11/06</time><span>语音验证码通道恢复使用</span></li>
+          <li><time datetime="2026-11-05">11/05</time><span>反馈区新增“登录问题”标签</span></li>
+          <li><time datetime="2026-11-03">11/03</time><span>设备列表支持手动删除</span></li>
+          <li><time datetime="2026-11-01">11/01</time><span>新手指引补充拼图操作说明</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col foot-brand">
+        <span class="brand-name">maya论坛登录入口</span>
+        <p>把账号、验证、版块权限三层规则讲清楚，减少重复提问与无效重试。本页内容随登录页版本同步维护。</p>
+      </div>
+      <div class="foot-col">
+        <h4>登录帮助</h4>
+        <ul>
+          <li><a href="/#guide">手机号快捷登录</a></li>
+          <li><a href="/#faq">短信验证码排查</a></li>
+          <li><a href="/#faq">邮箱停用找回</a></li>
+          <li><a href="/#analysis">异地登录验证</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>版块与规则</h4>
+        <ul>
+          <li><a href="/#cats">分类入口总览</a></li>
+          <li><a href="/#faq">等级与版块权限</a></li>
+          <li><a href="/#faq">交易区解锁条件</a></li>
+          <li><a href="/#timeline">版本时间线</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>社区互动</h4>
+        <ul>
+          <li><a href="/#comments">用户评论摘录</a></li>
+          <li><a href="/#supplement">反馈区活跃榜</a></li>
+          <li><a href="/#updates">站务公告列表</a></li>
+          <li><a href="/#reco">相关推荐标签</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>页面内容为示例数据整理，账号与版块信息以站内实际页面为准。最后更新：2026-11-07，对应正文“最新更新”与“版本时间线”条目。</span>
+      <span>© 2026 MAYA COMMUNITY</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部" title="回到顶部">↑</button>
+
+<script>
+(function(){
+  var menuBtn = document.getElementById('menuBtn');
+  var mainNav = document.getElementById('mainNav');
+  if(menuBtn && mainNav){
+    menuBtn.addEventListener('click', function(){
+      var open = mainNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mainNav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 860){
+        mainNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  // 搜索：本地查找
+  var form = document.getElementById('searchForm');
+  var input = document.getElementById('searchInput');
+  var msg = document.getElementById('searchMsg');
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-search-item]'));
+  items.forEach(function(el){
+    el.dataset.text = (el.textContent || '').replace(/\s+/g,'') + (el.dataset.keywords || '').replace(/\s+/g,'');
+  });
+  function doSearch(){
+    var q = (input.value || '').trim().replace(/\s+/g,'');
+    if(!q){
+      items.forEach(function(el){ el.classList.remove('hide'); });
+      msg.textContent = '';
+      return;
+    }
+    var hit = 0;
+    items.forEach(function(el){
+      var match = el.dataset.text.indexOf(q) !== -1;
+      el.classList.toggle('hide', !match);
+      if(match) hit++;
+    });
+    if(hit === 0){
+      msg.textContent = '没有找到与“' + q + '”相关的条目，试试“验证码”“拼图”“设备”或“版块”。';
+    }else{
+      msg.textContent = '找到 ' + hit + ' 个相关条目。';
+    }
+  }
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      doSearch();
+    });
+  }
+  if(input){
+    input.addEventListener('input', function(){
+      if(!input.value.trim()) doSearch();
+    });
+  }
+
+  // 回顶
+  var toTop = document.getElementById('toTop');
+  var ticking = false;
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(function(){
+        if(window.scrollY > 480){ toTop.classList.add('show'); }
+        else { toTop.classList.remove('show'); }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  toTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // 侧栏滚动高亮
+  var links = Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var targets = links.map(function(a){
+    var id = a.getAttribute('href').replace('/#','');
+    return document.getElementById(id);
+  }).filter(Boolean);
+  if('IntersectionObserver' in window && targets.length){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){
+            var id = a.getAttribute('href').replace('/#','');
+            a.classList.toggle('current', id === en.target.id);
+          });
+        }
+      });
+    }, {rootMargin:'-120px 0px -60% 0px', threshold:0});
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+</body>
+  </html>
